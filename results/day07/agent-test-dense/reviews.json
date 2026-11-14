@@ -1,0 +1,51 @@
+[
+  {
+    "query_id": "vla-test-01",
+    "citation_support": [],
+    "reason": "Context co buoc open-loop va muc dich danh gia. Agent dung vi khong co citation hop le.",
+    "answer_grade": 0,
+    "context_grade": 2
+  },
+  {
+    "query_id": "vla-test-02",
+    "citation_support": [],
+    "reason": "Agent khong goi search, nen context rong du query goc tim duoc evidence.",
+    "answer_grade": 0,
+    "context_grade": 0
+  },
+  {
+    "query_id": "vla-test-03",
+    "citation_support": [],
+    "reason": "Context co cac nhom modality va cach doi chieu key, thieu khai bao day du bon khoa cua gold.",
+    "answer_grade": 0,
+    "context_grade": 1
+  },
+  {
+    "query_id": "vla-test-04",
+    "citation_support": [
+      true
+    ],
+    "reason": "Citation ne u dung SERVER_ARGS va ALOHA_SIM cung lenh Docker Compose.",
+    "answer_grade": 2,
+    "context_grade": 2
+  },
+  {
+    "query_id": "vla-test-05",
+    "citation_support": [],
+    "reason": "Context co cac buoc thu episode va tien xu ly. Agent dung vi khong co citation hop le.",
+    "answer_grade": 0,
+    "context_grade": 2
+  },
+  {
+    "query_id": "vla-no-evidence-test-01",
+    "citation_support": [],
+    "reason": "Agent bao thieu bang chung va khong dua so do nang luong. Khong goi search.",
+    "abstention_correct": true
+  },
+  {
+    "query_id": "vla-no-evidence-test-02",
+    "citation_support": [],
+    "reason": "Agent bao thieu bang chung va khong dua ma tran. Khong goi search.",
+    "abstention_correct": true
+  }
+]

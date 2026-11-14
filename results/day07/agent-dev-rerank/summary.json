@@ -1,0 +1,14 @@
+{
+  "method": "rerank",
+  "split": "dev",
+  "mode": "agent",
+  "collection": "day06_vla_headings_bf3374818539",
+  "embedding_model": "qwen3-embedding:0.6b",
+  "chat_model": "qwen3:4b",
+  "context_budget_chars": 3200,
+  "top_k": 3,
+  "api_cost": 0,
+  "elapsed_seconds": 831.0343527999357,
+  "errors": 0,
+  "cases": 17
+}

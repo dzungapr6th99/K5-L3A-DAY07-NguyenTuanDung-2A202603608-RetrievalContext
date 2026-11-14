@@ -1,0 +1,3 @@
+# Chốt cấu hình trước khi chạy test
+
+Chọn dense, đồng thời là baseline. Trên dev, dense và rerank cùng đạt Evidence Hit@3 6/15. Dense đạt Hit@1 5/15, cao hơn rerank 4/15 và TF-IDF 3/15. Khi đọc trace agent, cả ba có lỗi grounding. Ví dụ dense trả thiếu cấu trúc tuple ở q03, lexical suy diễn sai backbone ở q04, rerank nhầm execution_horizon ở q13. Dense và lexical đều kết thúc ở trạng thái abstain cho hai câu dev thiếu evidence. Rerank gắn nhãn answered cho một lời báo thiếu evidence có citation. Giữ top 3, context 3.200 ký tự và tối đa hai lần tìm. Dense và cấu hình được chọn trùng nhau, nên chạy test một lần cho mỗi chế độ retrieval và agent.
