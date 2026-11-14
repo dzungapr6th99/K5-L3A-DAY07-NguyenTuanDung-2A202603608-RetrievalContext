@@ -1,0 +1,72 @@
+[
+  {
+    "id": "vla-test-01",
+    "split": "test",
+    "question": "Theo hướng dẫn triển khai GR00T, bước đánh giá nào được thực hiện trước khi chạy closed-loop trên robot thật?",
+    "answerable": true,
+    "expected_answer": "Chạy đánh giá open-loop để kiểm tra độ hội tụ và chất lượng mô hình.",
+    "gold": [
+      {
+        "source_id": "gr00t:getting_started/real_world_deployment.md",
+        "page": 1,
+        "evidence": "5. **[Model Evaluation](#validation)**: Run open-loop evaluation to validate convergence and model quality."
+      }
+    ]
+  },
+  {
+    "id": "vla-test-02",
+    "split": "test",
+    "question": "Khi dataset có ít camera hơn số đầu vào ảnh của một policy LeRobot hỗ trợ empty_cameras, có thể cấu hình thế nào?",
+    "answerable": true,
+    "expected_answer": "Đặt empty_cameras trong cấu hình policy để xử lý số camera thiếu.",
+    "gold": [
+      {
+        "source_id": "smolvla:docs/source/rename_map.mdx",
+        "page": 1,
+        "evidence": "Some policies are built for a fixed number of image inputs. If your dataset has fewer cameras, you can set **`empty_cameras`** in the policy config instead of modifying the model architecture."
+      }
+    ]
+  },
+  {
+    "id": "vla-test-03",
+    "split": "test",
+    "question": "Trong cấu hình modality của GR00T, các nhóm dữ liệu cấp cao được ánh xạ vào những khóa nào?",
+    "answerable": true,
+    "expected_answer": "Ảnh/video vào video, trạng thái robot vào state, hành động vào action và chú thích ngôn ngữ vào language. Mỗi khóa ánh xạ tới một ModalityConfig.",
+    "gold": [
+      {
+        "source_id": "gr00t:getting_started/data_config.md",
+        "page": 1,
+        "evidence": "A modality configuration is a Python dictionary containing four top-level keys: `\"video\"`, `\"state\"`, `\"action\"`, and `\"language\"`. Each key maps to a `ModalityConfig` object."
+      }
+    ]
+  },
+  {
+    "id": "vla-test-04",
+    "split": "test",
+    "question": "Trong ví dụ ALOHA Sim của openpi, cần đặt môi trường nào để chạy policy server bằng Docker?",
+    "answerable": true,
+    "expected_answer": "Đặt SERVER_ARGS thành --env ALOHA_SIM rồi chạy Docker Compose cho ví dụ aloha_sim.",
+    "gold": [
+      {
+        "source_id": "pi0:examples/aloha_sim/README.md",
+        "page": 1,
+        "evidence": "export SERVER_ARGS=\"--env ALOHA_SIM\" docker compose -f examples/aloha_sim/compose.yml up --build"
+      }
+    ]
+  },
+  {
+    "id": "vla-test-05",
+    "split": "test",
+    "question": "Theo workflow triển khai GR00T, cần thu và tiền xử lý dữ liệu teleoperation thế nào trước khi fine-tune?",
+    "answerable": true,
+    "expected_answer": "Chọn cách điều khiển từ xa phù hợp, thu ít nhất 100 episode hợp lệ, làm sạch, căn chỉnh timestamp và chuyển sang định dạng LeRobot.",
+    "gold": [
+      {
+        "source_id": "gr00t:getting_started/real_world_deployment.md",
+        "page": 1,
+        "evidence": "2. **[Data Collection](#2-data-collection)**: Choose an appropriate teleoperation setup and collect at least 100 valid episodes. 3. **[Data Preprocessing](#3-data-preprocessing)**: Clean data, align timestamps, and convert to LeRobot format."
+      }
+    ]
+  }
+]

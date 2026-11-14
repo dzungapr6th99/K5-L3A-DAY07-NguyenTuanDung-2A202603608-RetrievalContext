@@ -4,7 +4,10 @@ Adapters are intentionally not provided: Day 6 has no fixed database schema and
 model providers differ. Never use fake adapters to report benchmark quality.
 """
 from typing import Any, Protocol
-from baseline import pack_context
+if __package__:
+    from .baseline import pack_context
+else:
+    from baseline import pack_context
 
 
 class Controller(Protocol):
@@ -59,6 +62,9 @@ def run_agent(question: str, controller: Controller, retriever: Retriever, *,
             chunks = {c['id']: c for c in candidates if c['id'] in ids}
             events.append({'event': 'search', 'query': query, 'filter': filters, 'results': results,
                            'context': context, 'context_ids': ids})
+            ranking = getattr(retriever, 'last_ranking', None)
+            if ranking is not None:
+                events[-1]['ranking'] = ranking
             # Send only the latest cumulative context; avoid multiplying the budget.
             history = [{'tool': 'search', 'queries': [e['query'] for e in events if e['event'] == 'search'],
                         'context': context, 'context_ids': ids}]

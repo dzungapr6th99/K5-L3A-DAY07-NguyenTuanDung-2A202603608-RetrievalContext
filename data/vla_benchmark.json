@@ -1,0 +1,333 @@
+[
+  {
+    "id": "q01",
+    "split": "dev",
+    "question": "In NVIDIA's GR00T documentation, what VLM backbone and action head does N1.7 use?",
+    "answerable": true,
+    "expected_answer": "Cosmos-Reason2-2B via Qwen3-VL and a flow-matching DiT head with 16 diffusion layers.",
+    "filter": {
+      "category": "gr00t"
+    },
+    "gold": [
+      {
+        "source_id": "gr00t:README.md",
+        "page": 1,
+        "evidence": "VLM backbone changed from vendored Eagle, `nvidia/Eagle-Block2A-2B-v2`, to `nvidia/Cosmos-Reason2-2B` via Qwen3-VL. - Transformers changed from `4.51.3` to `4.57.3` to support the newer Qwen3-VL stack. - Model defaults changed: `select_layer` `16` to `12`, `tune_top_llm_layers` `4` to `0`, and `load_bf16` `true` to `false`. - State and action dimensions expanded from `29` to `132`, and `action_horizon` expanded from `16` to `40`. - Action head remains flow-matching DiT, but changes from `32` to `16` diffusion layers and adds newer N1.7 behavior options."
+      }
+    ]
+  },
+  {
+    "id": "q02",
+    "split": "dev",
+    "question": "What distinguishes SmolVLA's inputs and output from a language-only or vision-language interface?",
+    "answerable": true,
+    "expected_answer": "It combines camera views, current robot state and a language instruction to generate an action chunk.",
+    "filter": null,
+    "gold": [
+      {
+        "source_id": "smolvla:docs/source/smolvla.mdx",
+        "page": 1,
+        "evidence": "SmolVLA takes as input (i) multiple cameras views, (ii) the robot’s current sensorimotor state, and (iii) a natural language instruction, encoded into contextual features used to condition the action expert when generating an action chunk."
+      }
+    ]
+  },
+  {
+    "id": "q03",
+    "split": "dev",
+    "question": "What does the GR00T get_action API return?",
+    "answerable": true,
+    "expected_answer": "A tuple containing a dictionary of action arrays and an info dictionary that is currently empty.",
+    "filter": null,
+    "gold": [
+      {
+        "source_id": "gr00t:getting_started/policy.md",
+        "page": 1,
+        "evidence": "The method returns a tuple of: - `action`: Dictionary of action arrays - `info`: Dictionary of additional information (currently empty, reserved for future use)"
+      }
+    ]
+  },
+  {
+    "id": "q04",
+    "split": "dev",
+    "question": "Which model provides the reasoning-capable vision-language backbone in GR00T N1.7?",
+    "answerable": true,
+    "expected_answer": "Cosmos-Reason2-2B, based on Qwen3-VL.",
+    "filter": null,
+    "gold": [
+      {
+        "source_id": "gr00t:README.md",
+        "page": 1,
+        "evidence": "**New VLM backbone:** Cosmos-Reason2-2B (Qwen3-VL architecture), replacing the Eagle backbone used in N1.6."
+      }
+    ]
+  },
+  {
+    "id": "q05",
+    "split": "dev",
+    "question": "Is a VLA model multimodal, and which input and output modalities does it use?",
+    "answerable": true,
+    "expected_answer": "Yes. SmolVLA uses camera views, robot sensorimotor state and a natural language instruction to generate an action chunk.",
+    "filter": null,
+    "gold": [
+      {
+        "source_id": "smolvla:docs/source/smolvla.mdx",
+        "page": 1,
+        "evidence": "SmolVLA takes as input (i) multiple cameras views, (ii) the robot’s current sensorimotor state, and (iii) a natural language instruction, encoded into contextual features used to condition the action expert when generating an action chunk."
+      }
+    ]
+  },
+  {
+    "id": "q06",
+    "split": "dev",
+    "question": "In GR00T N1.7, which components are tuned by default, and which flags enable language or visual tuning?",
+    "answerable": true,
+    "expected_answer": "The projector and diffusion action head are tuned by default. Use --tune-llm or --tune-visual for the respective components.",
+    "filter": null,
+    "gold": [
+      {
+        "source_id": "gr00t:getting_started/hardware_recommendation.md",
+        "page": 1,
+        "evidence": "**Default fine-tuning** tunes the projector + diffusion action head (not the full LLM backbone), keeping peak VRAM under ~35 GB per GPU. - **Enabling `--tune-llm` or `--tune-visual`** significantly increases VRAM — 80 GB+ per GPU recommended."
+      }
+    ]
+  },
+  {
+    "id": "q07",
+    "split": "dev",
+    "question": "How does the GR00T action configuration distinguish absolute and relative control targets?",
+    "answerable": true,
+    "expected_answer": "Relative actions are deltas from the current state. Absolute actions are target positions.",
+    "filter": null,
+    "gold": [
+      {
+        "source_id": "gr00t:getting_started/data_config.md",
+        "page": 1,
+        "evidence": "Defines how actions should be interpreted: - `RELATIVE`: Actions are deltas from the current state (introduced in the UMI paper) - `ABSOLUTE`: Actions are target positions"
+      }
+    ]
+  },
+  {
+    "id": "q08",
+    "split": "dev",
+    "question": "How does the GR00T policy API organize camera, robot state, and language inputs?",
+    "answerable": true,
+    "expected_answer": "It uses a nested dictionary with video per camera, state per stream, and language task strings.",
+    "filter": null,
+    "gold": [
+      {
+        "source_id": "gr00t:getting_started/policy.md",
+        "page": 1,
+        "evidence": "The policy expects observations as a nested dictionary with three modalities: ```python observation = { \"video\": { \"camera_name\": np.ndarray, # Shape: (B, T, H, W, 3), dtype: uint8 # ... one entry per camera }, \"state\": { \"state_name\": np.ndarray, # Shape: (B, T, D), dtype: float32 # ... one entry per state stream }, \"language\": { \"task\": [[str]], # Shape: (B, 1), list of lists of strings } }"
+      }
+    ]
+  },
+  {
+    "id": "q09",
+    "split": "dev",
+    "question": "In the GR00T hardware guide, what is the minimum GPU memory for N1.7 fine-tuning?",
+    "answerable": true,
+    "expected_answer": "One GPU with at least 40 GB VRAM.",
+    "filter": {
+      "category": "gr00t"
+    },
+    "gold": [
+      {
+        "source_id": "gr00t:getting_started/hardware_recommendation.md",
+        "page": 1,
+        "evidence": "**Minimum:** 1 GPU with 40 GB+ VRAM."
+      }
+    ]
+  },
+  {
+    "id": "q10",
+    "split": "dev",
+    "question": "What data-capture constraints does the GR00T real-robot guide give for cameras and joint state?",
+    "answerable": true,
+    "expected_answer": "Match camera frame rates, synchronize triggers as closely as possible, and sample joint state faster than the cameras.",
+    "filter": null,
+    "gold": [
+      {
+        "source_id": "gr00t:getting_started/real_world_deployment.md",
+        "page": 1,
+        "evidence": "The FPS of both camera streams should be strictly matched, and capture triggers should be as synchronized as possible. - Joint state sampling frequency should exceed camera FPS to enable accurate downsampling."
+      }
+    ]
+  },
+  {
+    "id": "q11",
+    "split": "dev",
+    "question": "In LeRobot's remote inference setup, what does the robot client send to the policy server, and what does it receive in return?",
+    "answerable": true,
+    "expected_answer": "The client sends a fresh observation and receives a new action chunk, while executing buffered actions during inference.",
+    "filter": null,
+    "gold": [
+      {
+        "source_id": "smolvla:docs/source/remote_inference.mdx",
+        "page": 1,
+        "evidence": "The robot computer keeps a buffer of upcoming actions. When the buffer runs low it sends a fresh observation, keeps moving from the buffer while the server computes, and splices the new chunk into the part of the plan that has not been executed yet."
+      }
+    ]
+  },
+  {
+    "id": "q12",
+    "split": "dev",
+    "question": "How does LeRobot's rename_map handle camera keys that differ between the robot and the policy?",
+    "answerable": true,
+    "expected_answer": "It maps observation keys supplied by the robot or dataset to the names expected by the policy.",
+    "filter": null,
+    "gold": [
+      {
+        "source_id": "smolvla:docs/source/rename_map.mdx",
+        "page": 1,
+        "evidence": "When you train, evaluate, or record with a robot policy, your **dataset** or **environment** provides observations under one set of keys (e.g. `observation.images.front`, `observation.images.eagle`), while your **policy** expects another (e.g. `observation.images.image`, `observation.images.image2`). The **rename map** bridges that gap without changing the policy or data source."
+      }
+    ]
+  },
+  {
+    "id": "q13",
+    "split": "dev",
+    "question": "For Pi05 trained RTC in LeRobot, what does execution_horizon represent?",
+    "answerable": true,
+    "expected_answer": "It is the supplied prefix capacity, rather than the amount of action playback between requests.",
+    "filter": null,
+    "gold": [
+      {
+        "source_id": "smolvla:docs/source/rtc.mdx",
+        "page": 1,
+        "evidence": "Here `execution_horizon` is supplied prefix capacity, not the amount of playback between requests."
+      }
+    ]
+  },
+  {
+    "id": "q14",
+    "split": "dev",
+    "question": "What does openpi normalize during training and inference, and where are the statistics stored?",
+    "answerable": true,
+    "expected_answer": "It normalizes proprioceptive state inputs and action targets using training-set statistics stored alongside the checkpoint.",
+    "filter": null,
+    "gold": [
+      {
+        "source_id": "pi0:docs/norm_stats.md",
+        "page": 1,
+        "evidence": "Following common practice, our models normalize the proprioceptive state inputs and action targets during policy training and inference. The statistics used for normalization are computed over the training data and stored alongside the model checkpoint."
+      }
+    ]
+  },
+  {
+    "id": "q15",
+    "split": "dev",
+    "question": "How do SmolVLA's vision-language backbone and action expert work together to produce an action chunk?",
+    "answerable": true,
+    "expected_answer": "Camera views, robot state and the language instruction are encoded into contextual features that condition the action expert to produce an action chunk.",
+    "filter": null,
+    "gold": [
+      {
+        "source_id": "smolvla:docs/source/smolvla.mdx",
+        "page": 1,
+        "evidence": "SmolVLA takes as input (i) multiple cameras views, (ii) the robot’s current sensorimotor state, and (iii) a natural language instruction, encoded into contextual features used to condition the action expert when generating an action chunk."
+      }
+    ]
+  },
+  {
+    "id": "vla-test-01",
+    "split": "test",
+    "question": "Theo hướng dẫn triển khai GR00T, bước đánh giá nào được thực hiện trước khi chạy closed-loop trên robot thật?",
+    "answerable": true,
+    "expected_answer": "Chạy đánh giá open-loop để kiểm tra độ hội tụ và chất lượng mô hình.",
+    "gold": [
+      {
+        "source_id": "gr00t:getting_started/real_world_deployment.md",
+        "page": 1,
+        "evidence": "5. **[Model Evaluation](#validation)**: Run open-loop evaluation to validate convergence and model quality."
+      }
+    ]
+  },
+  {
+    "id": "vla-test-02",
+    "split": "test",
+    "question": "Khi dataset có ít camera hơn số đầu vào ảnh của một policy LeRobot hỗ trợ empty_cameras, có thể cấu hình thế nào?",
+    "answerable": true,
+    "expected_answer": "Đặt empty_cameras trong cấu hình policy để xử lý số camera thiếu.",
+    "gold": [
+      {
+        "source_id": "smolvla:docs/source/rename_map.mdx",
+        "page": 1,
+        "evidence": "Some policies are built for a fixed number of image inputs. If your dataset has fewer cameras, you can set **`empty_cameras`** in the policy config instead of modifying the model architecture."
+      }
+    ]
+  },
+  {
+    "id": "vla-test-03",
+    "split": "test",
+    "question": "Trong cấu hình modality của GR00T, các nhóm dữ liệu cấp cao được ánh xạ vào những khóa nào?",
+    "answerable": true,
+    "expected_answer": "Ảnh/video vào video, trạng thái robot vào state, hành động vào action và chú thích ngôn ngữ vào language. Mỗi khóa ánh xạ tới một ModalityConfig.",
+    "gold": [
+      {
+        "source_id": "gr00t:getting_started/data_config.md",
+        "page": 1,
+        "evidence": "A modality configuration is a Python dictionary containing four top-level keys: `\"video\"`, `\"state\"`, `\"action\"`, and `\"language\"`. Each key maps to a `ModalityConfig` object."
+      }
+    ]
+  },
+  {
+    "id": "vla-test-04",
+    "split": "test",
+    "question": "Trong ví dụ ALOHA Sim của openpi, cần đặt môi trường nào để chạy policy server bằng Docker?",
+    "answerable": true,
+    "expected_answer": "Đặt SERVER_ARGS thành --env ALOHA_SIM rồi chạy Docker Compose cho ví dụ aloha_sim.",
+    "gold": [
+      {
+        "source_id": "pi0:examples/aloha_sim/README.md",
+        "page": 1,
+        "evidence": "export SERVER_ARGS=\"--env ALOHA_SIM\" docker compose -f examples/aloha_sim/compose.yml up --build"
+      }
+    ]
+  },
+  {
+    "id": "vla-test-05",
+    "split": "test",
+    "question": "Theo workflow triển khai GR00T, cần thu và tiền xử lý dữ liệu teleoperation thế nào trước khi fine-tune?",
+    "answerable": true,
+    "expected_answer": "Chọn cách điều khiển từ xa phù hợp, thu ít nhất 100 episode hợp lệ, làm sạch, căn chỉnh timestamp và chuyển sang định dạng LeRobot.",
+    "gold": [
+      {
+        "source_id": "gr00t:getting_started/real_world_deployment.md",
+        "page": 1,
+        "evidence": "2. **[Data Collection](#2-data-collection)**: Choose an appropriate teleoperation setup and collect at least 100 valid episodes. 3. **[Data Preprocessing](#3-data-preprocessing)**: Clean data, align timestamps, and convert to LeRobot format."
+      }
+    ]
+  },
+  {
+    "id": "vla-no-evidence-dev-01",
+    "split": "dev",
+    "question": "Tài liệu LeRobot cho biết độ trễ P95 từ lúc camera chụp đến lúc motor nhận lệnh là bao nhiêu khi chạy SmolVLA remote inference qua Wi-Fi ở 30 FPS?",
+    "answerable": false,
+    "expected_behavior": "search_and_abstain",
+    "absence_reason": "Đã rà hướng dẫn remote inference, RTC và SmolVLA theo percentile, P95 và tail latency. Tài liệu mô tả luồng điều khiển và hàng đợi hành động, nhưng thiếu phép đo P95 từ camera đến motor cho cấu hình Wi-Fi này."
+  },
+  {
+    "id": "vla-no-evidence-dev-02",
+    "split": "dev",
+    "question": "Trong ví dụ ALOHA Sim của openpi, thời gian đọc từng dòng ảnh của camera rolling shutter là bao nhiêu micro giây?",
+    "answerable": false,
+    "expected_behavior": "search_and_abstain",
+    "absence_reason": "README ALOHA Sim hướng dẫn khởi động mô phỏng và policy server. Rà corpus theo rolling shutter, scanline và readout không tìm thấy thông số thời gian đọc từng dòng cho camera mô phỏng này."
+  },
+  {
+    "id": "vla-no-evidence-test-01",
+    "split": "test",
+    "question": "Trong bài thử GR00T N1.7 chạy TensorRT trên Jetson AGX Orin 64 GB, tài liệu đo được bao nhiêu joule cho mỗi action chunk?",
+    "answerable": false,
+    "expected_behavior": "search_and_abstain",
+    "absence_reason": "Đã rà hướng dẫn phần cứng GR00T và nhóm NVIDIA Agent Skills theo joule, energy và power draw. Tần số inference và hệ số tăng tốc được mô tả trong hướng dẫn phần cứng, nhưng thiếu số đo năng lượng trên mỗi action chunk cho cấu hình được hỏi."
+  },
+  {
+    "id": "vla-no-evidence-test-02",
+    "split": "test",
+    "question": "Tài liệu thu dữ liệu teleoperation cho GR00T quy định ma trận hiệp phương sai hiệu chuẩn nào cho cảm biến lực và mô-men xoắn sáu trục ở cổ tay?",
+    "answerable": false,
+    "expected_behavior": "search_and_abstain",
+    "absence_reason": "Đã rà hướng dẫn triển khai, chuẩn bị dữ liệu và cấu hình modality của GR00T, đồng thời tìm force-torque, six-axis, load cell, wrench và calibration covariance trong corpus. Tài liệu nói về camera, trạng thái robot và căn chỉnh thời gian, nhưng thiếu ma trận hiệu chuẩn cho cảm biến được hỏi."
+  }
+]

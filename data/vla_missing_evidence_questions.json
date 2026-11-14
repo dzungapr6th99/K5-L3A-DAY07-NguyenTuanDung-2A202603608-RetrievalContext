@@ -1,0 +1,34 @@
+[
+  {
+    "id": "vla-no-evidence-dev-01",
+    "split": "dev",
+    "question": "Tài liệu LeRobot cho biết độ trễ P95 từ lúc camera chụp đến lúc motor nhận lệnh là bao nhiêu khi chạy SmolVLA remote inference qua Wi-Fi ở 30 FPS?",
+    "answerable": false,
+    "expected_behavior": "search_and_abstain",
+    "absence_reason": "Đã rà hướng dẫn remote inference, RTC và SmolVLA theo percentile, P95 và tail latency. Tài liệu mô tả luồng điều khiển và hàng đợi hành động, nhưng thiếu phép đo P95 từ camera đến motor cho cấu hình Wi-Fi này."
+  },
+  {
+    "id": "vla-no-evidence-dev-02",
+    "split": "dev",
+    "question": "Trong ví dụ ALOHA Sim của openpi, thời gian đọc từng dòng ảnh của camera rolling shutter là bao nhiêu micro giây?",
+    "answerable": false,
+    "expected_behavior": "search_and_abstain",
+    "absence_reason": "README ALOHA Sim hướng dẫn khởi động mô phỏng và policy server. Rà corpus theo rolling shutter, scanline và readout không tìm thấy thông số thời gian đọc từng dòng cho camera mô phỏng này."
+  },
+  {
+    "id": "vla-no-evidence-test-01",
+    "split": "test",
+    "question": "Trong bài thử GR00T N1.7 chạy TensorRT trên Jetson AGX Orin 64 GB, tài liệu đo được bao nhiêu joule cho mỗi action chunk?",
+    "answerable": false,
+    "expected_behavior": "search_and_abstain",
+    "absence_reason": "Đã rà hướng dẫn phần cứng GR00T và nhóm NVIDIA Agent Skills theo joule, energy và power draw. Tần số inference và hệ số tăng tốc được mô tả trong hướng dẫn phần cứng, nhưng thiếu số đo năng lượng trên mỗi action chunk cho cấu hình được hỏi."
+  },
+  {
+    "id": "vla-no-evidence-test-02",
+    "split": "test",
+    "question": "Tài liệu thu dữ liệu teleoperation cho GR00T quy định ma trận hiệp phương sai hiệu chuẩn nào cho cảm biến lực và mô-men xoắn sáu trục ở cổ tay?",
+    "answerable": false,
+    "expected_behavior": "search_and_abstain",
+    "absence_reason": "Đã rà hướng dẫn triển khai, chuẩn bị dữ liệu và cấu hình modality của GR00T, đồng thời tìm force-torque, six-axis, load cell, wrench và calibration covariance trong corpus. Tài liệu nói về camera, trạng thái robot và căn chỉnh thời gian, nhưng thiếu ma trận hiệu chuẩn cho cảm biến được hỏi."
+  }
+]

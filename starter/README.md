@@ -1,5 +1,20 @@
 # Starter Day 7
 
+## Benchmark VLA trên Jetson
+
+Cài `requirements.txt` trong môi trường ảo và cấu hình `.env` theo `.env.example`.
+Từ gốc repo, dùng chung collection DAY06 và bộ câu hỏi `data/vla_benchmark.json`:
+
+```powershell
+python -X utf8 -m starter.run_benchmark --split dev --output-root starter/results/dev-run
+python -X utf8 -m starter.run_benchmark --split dev --agent --output-root starter/results/dev-run
+```
+
+Lượt đầu dùng query gốc để đo Hit@1, Evidence Hit@3 và tỷ lệ context có evidence.
+Lượt agent ghi query thực tế, tool call, context, citation và trạng thái trả lời.
+Dùng `--method` để chọn từng phương pháp và dùng thư mục mới cho từng lần chạy.
+Rerank ưu tiên các ứng viên do model chọn, sau đó nối phần còn lại theo thứ hạng dense.
+
 | File | Công dụng |
 |---|---|
 | `agentic.py` | Khung agent ví dụ với số lượt search, top-k và context budget có thể cấu hình |
